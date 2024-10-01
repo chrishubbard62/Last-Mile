@@ -14,6 +14,10 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    owned_deliveries = db.relationship('Delivery', back_populates='owner', cascade='all, delete-orphan')
+    current_deliveries = db.relationship('Delivery', back_populates='courier')
+    messages = db.relationship('Message', back_populates='user', cascade='all, delete orphan')
+
     @property
     def password(self):
         return self.hashed_password
