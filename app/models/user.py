@@ -14,8 +14,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    owned_deliveries = db.relationship('Delivery', back_populates='owner', foreign_keys=add_prefix_for_prod('deliveries.owner_id'), cascade='all, delete-orphan')
-    current_deliveries = db.relationship('Delivery', back_populates='courier', foreign_keys=add_prefix_for_prod('deliveries.courier_id'))
+    owned_deliveries = db.relationship('Delivery', back_populates='owner', foreign_keys='Delivery.owner_id', cascade='all, delete-orphan')
+    current_deliveries = db.relationship('Delivery', back_populates='courier', foreign_keys='Delivery.courier_id')
     messages = db.relationship('Message', back_populates='user', cascade='all, delete-orphan')
 
     @property
