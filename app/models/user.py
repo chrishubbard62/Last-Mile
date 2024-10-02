@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
 
     owned_deliveries = db.relationship('Delivery', back_populates='owner', cascade='all, delete-orphan')
     current_deliveries = db.relationship('Delivery', back_populates='courier')
-    messages = db.relationship('Message', back_populates='user', cascade='all, delete orphan')
+    messages = db.relationship('Message', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):
