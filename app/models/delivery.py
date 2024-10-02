@@ -17,8 +17,8 @@ class Delivery(db.Model):
   description = db.Column(db.String(500), nullable=False)
   special_instructions = db.Column(db.String(500), nullable=True)
 
-  owner = db.relationship('User', back_populates='owned_deliveries')
-  courier = db.relationship('User', back_populates='current_deliveries')
+  owner = db.relationship('User', back_populates='owned_deliveries', foreign_keys=[owner_id])
+  courier = db.relationship('User', back_populates='current_deliveries', foreign_keys=[courier_id])
   messages = db.relationship('Message', back_populates='delivery', cascade='all, delete-orphan')
 
   def to_dict_basic(self):
