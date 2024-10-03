@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Delivery, db, Message
+from app.models import Delivery, db
 from ..utils import format_errors
 from app.forms import DeliveryForm
 
@@ -58,9 +58,13 @@ def get_details(id):
 @delivery_routes.route('', methods=['POST'])
 @login_required
 def create_delivery():
-  form = DeliveryForm()
+  '''
+  Create and returns a new delivery
+  '''
 
+  form = DeliveryForm()
   form['csrf_token'].data = request.cookies['csrf_token']
+
   if form.validate_on_submit():
     delivery = Delivery(
       owner_id = int(current_user.id),
@@ -77,6 +81,40 @@ def create_delivery():
     )
     db.session.add(delivery)
     db.session.commit()
-    return delivery.to_dict_basic()
+    return delivery.to_dict_basic(), 201
+
+  return {"errors": format_errors(form.errors)}, 400
+
+@delivery_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def update_delivery(id):
+  '''
+  Updates and returns and existing delivery
+  '''
+
+  delivery = Delivery.query.get(id)
+
+
+  if not delivery:
+    return {"message": "Delivery does not exist"}, 404
+  if delivery.owner_id != current_user.id:
+    return {"message" : "Forbidden"}, 403
+
+  form = DeliveryForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+
+  if form.validate_on_submit():
+      delivery.pickup_city = form.data['pickup_city']
+      delivery.pickup_state = form.data['pickup_state']
+      delivery.pickup_zip = form.data['pickup_zip']
+      delivery.pickup_address = form.data['pickup_address']
+      delivery.drop_city = form.data['drop_city']
+      delivery.drop_state = form.data['drop_state']
+      delivery.drop_zip = form.data['drop_zip']
+      delivery.drop_address = form.data['drop_address']
+      delivery.description = form.data['description']
+      delivery.special_instructions = form.data['special_instructions']
+      db.session.commit()
+      return delivery.to_dict_basic()
 
   return {"errors": format_errors(form.errors)}, 400
