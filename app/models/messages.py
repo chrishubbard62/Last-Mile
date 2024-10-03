@@ -22,6 +22,5 @@ class Message(db.Model):
       "deliveryId": self.delivery_id,
       "userId": self.user_id,
       "message": self.message,
-      "createdAt": self.created_at.strftime("%m-%d-%Y")
-
+      "createdAt": self.created_at.strftime("%m/%d/%Y, %H:%M:%S")
     }

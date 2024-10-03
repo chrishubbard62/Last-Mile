@@ -2,8 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, Length
 
+
 class DeliveryForm(FlaskForm):
-  
+
   pickup_city = StringField('pickup_city', validators=[DataRequired(), Length(min=1, max=50)])
   pickup_state = StringField('pickup_state', validators=[DataRequired(), Length(min=1, max=50)])
   pickup_zip = StringField('pickup_zip', validators=[DataRequired(), Length(min=1, max=15)])

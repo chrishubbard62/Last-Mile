@@ -1,10 +1,12 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Delivery, db
+from app.models import Delivery, db, Message
 from ..utils import format_errors
-from app.forms import DeliveryForm
+from app.forms import DeliveryForm, MessageForm
+
 
 delivery_routes = Blueprint('deliveries', __name__)
+
 
 @delivery_routes.route('/test')
 def test():
@@ -85,6 +87,7 @@ def create_delivery():
 
   return {"errors": format_errors(form.errors)}, 400
 
+
 @delivery_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_delivery(id):
@@ -93,7 +96,6 @@ def update_delivery(id):
   '''
 
   delivery = Delivery.query.get(id)
-
 
   if not delivery:
     return {"message": "Delivery does not exist"}, 404
@@ -138,3 +140,44 @@ def delete_delivery(id):
   db.session.commit()
 
   return {"message" : "Successfully deleted", 'deliveryId': id}
+
+
+@delivery_routes.route('/<int:id>/messages')
+def get_messages(id):
+  '''
+  Queries and returns all the messages related to a specific delivery
+  '''
+  messages = Message.query.filter(id == Message.delivery_id).order_by(Message.created_at)
+  return {"Messages": [message.to_dict_basic() for message in messages]}
+
+
+@delivery_routes.route('/<int:id>/messages', methods={'POST'})
+@login_required
+def create_message(id):
+  '''
+  Creates a new message at the for a delivery specified by the deliveries id
+  '''
+  delivery = Delivery.query.get(id)
+
+  if not delivery:
+    return {"message": "Delivery does not exist"}, 404
+
+  form = MessageForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+
+  if form.validate_on_submit():
+    delivery_id = int(id)
+    user_id = int(current_user.id)
+    message = form.data['message']
+
+    new_message = Message(
+      delivery_id =delivery_id,
+      user_id = user_id,
+      message = message
+    )
+    db.session.add(new_message)
+    db.session.commit()
+    return new_message.to_dict_basic(), 201
+
+  return {"errors": format_errors(form.errors)}, 400
+
