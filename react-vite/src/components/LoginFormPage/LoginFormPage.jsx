@@ -31,34 +31,46 @@ function LoginFormPage() {
     }
   };
 
+  const handleNavigate = (e) => {
+    e.preventDefault()
+    navigate('/signup')
+  }
+
   return (
     <>
-      <h1>Log In</h1>
-      {errors.length > 0 &&
-        errors.map((message) => <p key={message}>{message}</p>)}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-      </form>
+      <div className="login-outer-container">
+        <div className='login-inner-container'>
+          <h1 className="title-h1">WELCOME TO LAST MILE</h1>
+          {errors.length > 0 &&
+            errors.map((message) => <p key={message}>{message}</p>)}
+          <form className="login-form" onSubmit={handleSubmit}>
+            <label>
+              Email
+            </label>
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            {errors.email && <p>{errors.email}</p>}
+            <label>
+              Password
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {errors.password && <p>{errors.password}</p>}
+            <button className="login-submit" type="submit">Log In</button>
+          </form>
+          <button onClick={handleNavigate}>Sign Up</button>
+        </div>
+
+      </div>
+
     </>
   );
 }

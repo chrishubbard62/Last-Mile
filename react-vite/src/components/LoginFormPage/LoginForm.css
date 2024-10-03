@@ -1,0 +1,28 @@
+.login-outer-container{
+  outline: 1px solid red;
+  height: 100vh;
+
+}
+
+.login-inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem
+}
+
+.title-h1 {
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-submit {
+  margin-top: .5rem;
+}

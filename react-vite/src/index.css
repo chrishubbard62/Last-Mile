@@ -1,1 +1,19 @@
 /* TODO: Add sitewide styles */
+button {
+  height: 30px;
+  background-color: #262267;
+  color: white
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  background-color: #e8e7f3;
+}
