@@ -11,7 +11,7 @@ def test():
   '''
   Initial test to make sure the blueprint is set up properly
   '''
-  return {"Test" : "Test"}
+  return {"test" : "test"}
 
 
 @delivery_routes.route('')
@@ -118,3 +118,23 @@ def update_delivery(id):
       return delivery.to_dict_basic()
 
   return {"errors": format_errors(form.errors)}, 400
+
+@delivery_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_delivery(id):
+  """
+  Deletes an existing delivery
+  """
+  delivery = Delivery.query.get(id)
+
+  if not delivery:
+    return {"message": "Delivery does not exist"}, 404
+  if delivery.owner_id != current_user.id:
+    return {"message" : "Forbidden"}, 403
+
+  id = delivery.id
+
+  db.session.delete(delivery)
+  db.session.commit()
+
+  return {"message" : "Successfully deleted", 'deliveryId': id}
