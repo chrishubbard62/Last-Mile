@@ -151,7 +151,7 @@ def get_messages(id):
   return {"Messages": [message.to_dict_basic() for message in messages]}
 
 
-@delivery_routes.route('/<int:id>/messages', methods={'POST'})
+@delivery_routes.route('/<int:id>/messages', methods=['POST'])
 @login_required
 def create_message(id):
   '''
@@ -180,4 +180,3 @@ def create_message(id):
     return new_message.to_dict_basic(), 201
 
   return {"errors": format_errors(form.errors)}, 400
-
