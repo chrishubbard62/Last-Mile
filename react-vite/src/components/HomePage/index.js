@@ -1,3 +1,3 @@
-import HomePage from "./HomePage";
+import DeliveryContainer from "./DeliveryContainer";
 
-export default HomePage
+export default DeliveryContainer
