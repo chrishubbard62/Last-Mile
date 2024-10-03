@@ -7,7 +7,6 @@ from app.forms import DeliveryForm, MessageForm
 
 delivery_routes = Blueprint('deliveries', __name__)
 
-
 @delivery_routes.route('/test')
 def test():
   '''
