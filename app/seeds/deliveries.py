@@ -2,10 +2,12 @@ from app.models import db, Delivery, environment, SCHEMA
 from sqlalchemy.sql import text
 from .users import demo, marnie
 delivery1 = Delivery(
+    pickup_name="TCB courier",
     pickup_city="San Francisco",
     pickup_state="CA",
     pickup_zip="94102",
     pickup_address="565b Ellis Street",
+    drop_name="Bane Company",
     drop_city="San Francisco",
     drop_state="CA",
     drop_zip="94105",
@@ -17,10 +19,12 @@ delivery1 = Delivery(
 )
 
 delivery2 = Delivery(
+    pickup_name="Seedy People",
     pickup_city="San Francisco",
     pickup_state="CA",
     pickup_zip="94110",
     pickup_address="350 Treat Ave",
+    drop_name="Goldengate Technologies",
     drop_city="San Francisco",
     drop_state="CA",
     drop_zip="94104",
@@ -31,10 +35,12 @@ delivery2 = Delivery(
 )
 
 delivery3 = Delivery(
+    pickup_name="Trays R Us",
     pickup_city="San Francisco",
     pickup_state="CA",
     pickup_zip="94107",
     pickup_address="1011 Mariposa St",
+    drop_name="Pac Heights Condos",
     drop_city="San Francisco",
     drop_state="CA",
     drop_zip="94123",
@@ -45,10 +51,12 @@ delivery3 = Delivery(
 )
 
 delivery4 = Delivery(
+    pickup_name="Flower Power",
     pickup_city="San Francisco",
     pickup_state="CA",
     pickup_zip="94114",
     pickup_address="2298 Market St",
+    drop_name="Broderick Gardens",
     drop_city="San Francisco",
     drop_state="CA",
     drop_zip="94117",
@@ -59,10 +67,12 @@ delivery4 = Delivery(
 )
 
 delivery5 = Delivery(
+    pickup_name="Nice Trees",
     pickup_city="San Francisco",
     pickup_state="CA",
     pickup_zip="94103",
     pickup_address="450 8th St",
+    drop_name="GGP Maintenance",
     drop_city="San Francisco",
     drop_state="CA",
     drop_zip="94116",

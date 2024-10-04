@@ -4,12 +4,13 @@ from wtforms.validators import DataRequired, Length
 
 
 class DeliveryForm(FlaskForm):
-
+  pickup_name = StringField('pickup_name', validators=[DataRequired(), Length(min=1, max=100)])
   pickup_city = StringField('pickup_city', validators=[DataRequired(), Length(min=1, max=50)])
   pickup_state = StringField('pickup_state', validators=[DataRequired(), Length(min=1, max=50)])
   pickup_zip = StringField('pickup_zip', validators=[DataRequired(), Length(min=1, max=15)])
   pickup_address = StringField('pickup_address', validators=[DataRequired(), Length(min=1, max=150)])
 
+  drop_name = StringField('drop_name', validators=[DataRequired(), Length(min=1, max=100)])
   drop_city = StringField('drop_city', validators=[DataRequired(), Length(min=1, max=50)])
   drop_state = StringField('drop_state', validators=[DataRequired(), Length(min=1, max=50)])
   drop_zip = StringField('drop_zip', validators=[DataRequired(), Length(min=1, max=15)])
