@@ -1,9 +1,17 @@
-const GET_UNASSIGNED = 'deliveries/getUnassigned'
+const GET_DELIVERIES = 'deliveries/getUnassigned'
 const GET_DELIVERY = 'deliveries/getDelivery'
+const TAKE_DELIVERY = 'deliveries/takeDelivery'
 
-const getUnassigned = (payload) => {
+const takeDelivery = (payload) => {
   return {
-    type: GET_UNASSIGNED,
+    type: TAKE_DELIVERY,
+    payload
+  }
+}
+
+const getDeliveries = (payload) => {
+  return {
+    type: GET_DELIVERIES,
     payload
   }
 }
@@ -19,7 +27,15 @@ export const getUnassignedThunk = () => async (dispatch) => {
   const res = await fetch('/api/deliveries/unassigned')
   if(res.ok) {
     const data = await res.json();
-    dispatch(getUnassigned(data.Deliveries))
+    dispatch(getDeliveries(data.Deliveries))
+  }
+}
+
+export const getCurrentThunk = () => async (dispatch) => {
+  const res = await fetch('/api/deliveries/current')
+  if(res.ok) {
+    const data = await res.json()
+    dispatch(getDeliveries(data.Deliveries))
   }
 }
 
@@ -32,11 +48,22 @@ export const getDeliveryThunk = (id) => async (dispatch) => {
   }
 }
 
+export const takeDeliveryThunk = (id) => async (dispatch) => {
+  const res = await fetch(`/api/deliveries/${id}/take`, {
+    method: 'PATCH'
+  })
+  if(res.ok) {
+    const delivery = await res.json()
+    dispatch(takeDelivery(delivery))
+    return delivery
+  }
+}
+
 const initialState = {}
 
 export default function deliveryReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_UNASSIGNED: {
+    case GET_DELIVERIES: {
       const newState = {...state}
       action.payload.forEach((delivery) => {
         if(state[delivery.id]) {
@@ -54,6 +81,11 @@ export default function deliveryReducer(state = initialState, action) {
       } else {
         newState[action.payload.id] = action.payload
       }
+      return newState
+    }
+    case TAKE_DELIVERY: {
+      const newState = { ...state}
+      newState[action.payload.id] = {...newState[action.payload.id], ...action.payload}
       return newState
     }
     default:

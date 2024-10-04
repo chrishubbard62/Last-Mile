@@ -120,6 +120,23 @@ def update_delivery(id):
 
   return {"errors": format_errors(form.errors)}, 400
 
+
+@delivery_routes.route('/<int:id>/take', methods=['PATCH'])
+@login_required
+def take_delivery(id):
+  '''
+  updates the courier id on a delivery
+  '''
+  delivery = Delivery.query.get(id)
+
+  if not delivery:
+    return {"message": "Delivery does not exist"}, 404
+
+  delivery.courier_id = current_user.id
+  db.session.commit()
+  return delivery.to_dict_basic()
+
+
 @delivery_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_delivery(id):

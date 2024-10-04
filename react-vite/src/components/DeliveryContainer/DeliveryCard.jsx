@@ -1,12 +1,21 @@
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { takeDeliveryThunk } from '../../redux/deliveries'
+
 import './DeliveryContainer.css'
 
 
 
 export default function DeliveryCard({ delivery }) {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const handleDetails = () => {
     navigate(`/deliveries/${delivery.id}`)
+  }
+  const handleTake = () => {
+    console.log('ok')
+    dispatch(takeDeliveryThunk(delivery.id))
   }
 
   return (
@@ -25,7 +34,7 @@ export default function DeliveryCard({ delivery }) {
       </div>
       <div className='card-button-container'>
         <button onClick={handleDetails}>Details</button>
-        <button>Take</button>
+        <button onClick={handleTake}>Take</button>
       </div>
     </div>
   )
