@@ -15,13 +15,13 @@ export default function DeliveryContainer() {
 
   return (
     <div>
-      <nav>
+      <nav className="delivery-nav">
         <ul>
           <li>
-          <NavLink to='/'>Unassigned</NavLink>
+          <NavLink className='nav-link' to='/'>Unassigned</NavLink>
           </li>
           <li>
-          <NavLink to='/current'>Current</NavLink>
+          <NavLink className='nav-link' to='/current'>Current</NavLink>
           </li>
         </ul>
       </nav>

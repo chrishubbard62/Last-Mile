@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
-import HomePage from '../components/DeliveryContainer';
+import DeliveryContainer from '../components/DeliveryContainer';
+import DeliveryDetails from '../components/DeliveryDetailsContainer';
 import Layout from './Layout';
 
 
@@ -11,11 +12,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: <DeliveryContainer />,
       },
       {
         path: "/deliveries/:id",
-        element: <h1>WHAT</h1>
+        element: <DeliveryDetails />
       }
     ],
   },

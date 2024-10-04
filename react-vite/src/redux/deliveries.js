@@ -1,8 +1,16 @@
 const GET_UNASSIGNED = 'deliveries/getUnassigned'
+const GET_DELIVERY = 'deliveries/getdelivery'
 
 const getUnassigned = (payload) => {
   return {
     type: GET_UNASSIGNED,
+    payload
+  }
+}
+
+const getDelivery = (payload) => {
+  return {
+    type: GET_DELIVERY,
     payload
   }
 }
@@ -12,6 +20,15 @@ export const getUnassignedThunk = () => async (dispatch) => {
   if(res.ok) {
     const data = await res.json();
     dispatch(getUnassigned(data.Deliveries))
+  }
+}
+
+export const getDeliveryThunk = (id) => async (dispatch) => {
+  const res = await fetch(`/api/deliveries/${id}`)
+  if(res.ok) {
+    const delivery = await res.json()
+    dispatch(getDelivery(delivery))
+    return delivery
   }
 }
 
@@ -28,6 +45,15 @@ export default function deliveryReducer(state = initialState, action) {
           newState[delivery.id] = delivery
         }
       })
+      return newState
+    }
+    case GET_DELIVERY: {
+      const newState = {...state}
+      if(state[action.payload.id]) {
+        newState[action.payload.id] = {...state[action.payload.id], ...action.payload}
+      } else {
+        newState[action.payload.id] = action.payload
+      }
       return newState
     }
     default:

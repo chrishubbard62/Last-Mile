@@ -1,6 +1,6 @@
 .card-outer-container {
   display: flex;
-  gap: 5rem;
+  gap: 3rem;
   outline: 1px solid green
 }
 
@@ -10,4 +10,21 @@
 
 .drop-container {
   outline: 2px solid red;
+}
+
+.delivery-nav {
+  display: flex;
+  height: 4rem;
+  background-color: #7771e5
+}
+
+.delivery-nav ul {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  background-color: #e8e7f3;
+  padding: .5rem;
 }

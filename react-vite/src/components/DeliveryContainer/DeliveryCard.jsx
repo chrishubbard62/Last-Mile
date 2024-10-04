@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import './DeliveryContainer.css'
 
 
+
 export default function DeliveryCard({ delivery }) {
   const navigate = useNavigate()
   const handleDetails = () => {
