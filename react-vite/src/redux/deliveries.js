@@ -1,10 +1,10 @@
 const GET_DELIVERIES = 'deliveries/getUnassigned'
 const GET_DELIVERY = 'deliveries/getDelivery'
-const TAKE_DELIVERY = 'deliveries/takeDelivery'
+const UPDATE_COURIER = 'deliveries/takeDelivery'
 
-const takeDelivery = (payload) => {
+const updateCourier = (payload) => {
   return {
-    type: TAKE_DELIVERY,
+    type: UPDATE_COURIER,
     payload
   }
 }
@@ -54,7 +54,18 @@ export const takeDeliveryThunk = (id) => async (dispatch) => {
   })
   if(res.ok) {
     const delivery = await res.json()
-    dispatch(takeDelivery(delivery))
+    dispatch(updateCourier(delivery))
+    return delivery
+  }
+}
+
+export const unassignDeliveryThunk = (id) => async (dispatch) => {
+  const res = await fetch(`/api/deliveries/${id}/unassign`, {
+    method: "PATCH"
+  })
+  if(res.ok) {
+    const delivery = await res.json()
+    dispatch(updateCourier(delivery))
     return delivery
   }
 }
@@ -83,7 +94,7 @@ export default function deliveryReducer(state = initialState, action) {
       }
       return newState
     }
-    case TAKE_DELIVERY: {
+    case UPDATE_COURIER: {
       const newState = { ...state}
       newState[action.payload.id] = {...newState[action.payload.id], ...action.payload}
       return newState

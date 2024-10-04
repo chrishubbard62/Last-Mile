@@ -136,6 +136,21 @@ def take_delivery(id):
   db.session.commit()
   return delivery.to_dict_basic()
 
+@delivery_routes.route('/<int:id>/unassign', methods=['PATCH'])
+@login_required
+def unassign_delivery(id):
+  '''
+  nulls a courier id on a delivery
+  '''
+  delivery = Delivery.query.get(id)
+
+  if not delivery:
+    return {"message": "Delivery does not exist"}, 404
+
+  delivery.courier_id = None
+  db.session.commit()
+  return delivery.to_dict_basic()
+
 
 @delivery_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
