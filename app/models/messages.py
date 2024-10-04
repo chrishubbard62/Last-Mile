@@ -24,3 +24,9 @@ class Message(db.Model):
       "message": self.message,
       "createdAt": self.created_at.strftime("%m/%d/%Y, %H:%M:%S")
     }
+
+  def to_dict_user(self):
+    return {
+      **self.to_dict_basic(),
+      "user": self.user.to_dict()
+    }

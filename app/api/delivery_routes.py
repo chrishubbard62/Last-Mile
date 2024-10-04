@@ -147,7 +147,7 @@ def get_messages(id):
   Queries and returns all the messages related to a specific delivery
   '''
   messages = Message.query.filter(id == Message.delivery_id).order_by(Message.created_at)
-  return {"Messages": [message.to_dict_basic() for message in messages]}
+  return {"Messages": [message.to_dict_user() for message in messages]}
 
 
 @delivery_routes.route('/<int:id>/messages', methods=['POST'])

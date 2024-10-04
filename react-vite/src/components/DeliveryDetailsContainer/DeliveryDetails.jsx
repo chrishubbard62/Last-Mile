@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { getDeliveryThunk } from "../../redux/deliveries"
 import './DeliveryDetails.css'
 import SFMap from '/map.jpg'
+import MessageContainer from '../MessageContainer'
 
 export default function DeliveryDetails() {
   const { id } = useParams()
@@ -17,6 +18,7 @@ export default function DeliveryDetails() {
   if (!delivery) return <h2>Loading</h2>
 
   return (
+    <div className="details-page-container">
     <div className="details-outer-container">
       <div className="details-delivery-container">
         <div className="details-pickup">
@@ -33,15 +35,19 @@ export default function DeliveryDetails() {
           <div>{delivery.dropCity}, {delivery.dropState} {delivery.dropZip}</div>
         </div>
         <div className="details-instructions">
-          <div>Description</div>
+          <h3>Description</h3>
           <div>{delivery.description}</div>
-          <div>Special Instructions</div>
+          <h3>Special Instructions</h3>
           <div>{delivery.specialInstructions}</div>
         </div>
       </div>
       <div className="map-placeholder">
         <img className='map' src={SFMap} alt="map" />
       </div>
+    </div>
+    <div className="messages-container">
+    <MessageContainer />
+    </div>
     </div>
   )
 }
