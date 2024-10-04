@@ -2,7 +2,8 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getDeliveryThunk } from "../../redux/deliveries"
-import SFMap from '/map.JPG'
+import './DeliveryDetails.css'
+import SFMap from '/map.jpg'
 
 export default function DeliveryDetails() {
   const { id } = useParams()
@@ -31,9 +32,15 @@ export default function DeliveryDetails() {
           <div>{delivery.dropAddress}</div>
           <div>{delivery.dropCity}, {delivery.dropState} {delivery.dropZip}</div>
         </div>
+        <div className="details-instructions">
+          <div>Description</div>
+          <div>{delivery.description}</div>
+          <div>Special Instructions</div>
+          <div>{delivery.specialInstructions}</div>
+        </div>
       </div>
       <div className="map-placeholder">
-        <img src={SFMap} alt="map" />
+        <img className='map' src={SFMap} alt="map" />
       </div>
     </div>
   )

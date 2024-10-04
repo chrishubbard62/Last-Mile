@@ -1,0 +1,8 @@
+.details-outer-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.map {
+  height: 70%;
+}
