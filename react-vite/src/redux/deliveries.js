@@ -1,5 +1,5 @@
 const GET_UNASSIGNED = 'deliveries/getUnassigned'
-const GET_DELIVERY = 'deliveries/getdelivery'
+const GET_DELIVERY = 'deliveries/getDelivery'
 
 const getUnassigned = (payload) => {
   return {
@@ -40,7 +40,7 @@ export default function deliveryReducer(state = initialState, action) {
       const newState = {...state}
       action.payload.forEach((delivery) => {
         if(state[delivery.id]) {
-          newState[delivery.id] = {...state[delivery], ...delivery}
+          newState[delivery.id] = {...state[delivery.id], ...delivery}
         } else {
           newState[delivery.id] = delivery
         }

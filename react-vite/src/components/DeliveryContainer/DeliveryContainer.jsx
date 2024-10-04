@@ -7,7 +7,7 @@ import DeliveryCard from "./DeliveryCard"
 export default function DeliveryContainer() {
   const delData = useSelector(state => state.deliveries)
   const dispatch = useDispatch()
-  const deliveries = Object.values(delData)
+  const unassignedDeliveries = Object.values(delData).filter((delivery) => delivery.courierId === null)
 
   useEffect(() => {
     dispatch(getUnassignedThunk())
@@ -25,7 +25,7 @@ export default function DeliveryContainer() {
           </li>
         </ul>
       </nav>
-      {deliveries.map(delivery => <DeliveryCard key={delivery.id} delivery={delivery}/>)}
+      {unassignedDeliveries.map(delivery => <DeliveryCard key={delivery.id} delivery={delivery}/>)}
     </div>
   )
 }
