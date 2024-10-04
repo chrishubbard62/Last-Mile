@@ -40,7 +40,7 @@ class Delivery(db.Model):
       "pickupState": self.pickup_state,
       "pickupZip": self.pickup_zip,
       "pickupAddress": self.pickup_address,
-      "dropNam": self.drop_name,
+      "dropName": self.drop_name,
       "dropCity": self.drop_city,
       "dropState": self.drop_state,
       "dropZip": self.drop_zip,

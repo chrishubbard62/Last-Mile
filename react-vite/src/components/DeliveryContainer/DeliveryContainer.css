@@ -1,0 +1,13 @@
+.card-outer-container {
+  display: flex;
+  gap: 5rem;
+  outline: 1px solid green
+}
+
+.pickup-container {
+  outline: 2px solid red
+}
+
+.drop-container {
+  outline: 2px solid red;
+}

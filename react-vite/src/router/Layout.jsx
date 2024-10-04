@@ -13,7 +13,10 @@ export default function Layout() {
   useEffect(() => {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
-  if(!sessionUser) return <Navigate to="/login" replace={true}/>
+
+  if(!sessionUser && isLoaded) {
+    return <Navigate to="/login" replace={true}/>
+  }
 
   return (
     <>
