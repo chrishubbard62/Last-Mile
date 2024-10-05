@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createDeliveryThunk } from "../../redux/deliveries";
 import { STATES, REQUIRED, EXCEEDED, INVALID } from "./FormUtils";
 import './DeliveryForm.css'
 
 export default function DeliveryForm() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [pickupName, setPickupName] = useState('')
   const [pickupCity, setPickupCity] = useState('')
@@ -60,10 +63,26 @@ export default function DeliveryForm() {
       dropAddress.length, dropZip.length, dropState,
       specialInstructions, description])
 
-  const handleNew = (e) => {
+  const handleNew = async (e) => {
     e.preventDefault()
     setSubmitted(true)
-    Object.values(valErrors).length ? console.log(valErrors) : console.log('woohoo')
+    if(Object.values(valErrors).length) return
+    const delivery = {
+      pickup_name: pickupName,
+      pickup_city: pickupCity,
+      pickup_state: pickupState,
+      pickup_zip: pickupZip,
+      pickup_address: pickupAddress,
+      drop_name: dropName,
+      drop_city: dropCity,
+      drop_state: dropState,
+      drop_zip: dropZip,
+      drop_address: dropAddress,
+      special_instructions: specialInstructions,
+      description
+    }
+    const newDelivery = await dispatch(createDeliveryThunk(delivery))
+    navigate(`/deliveries/${newDelivery.id}`)
 
   }
 

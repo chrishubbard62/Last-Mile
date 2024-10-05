@@ -69,10 +69,12 @@ def create_delivery():
   if form.validate_on_submit():
     delivery = Delivery(
       owner_id = int(current_user.id),
+      pickup_name = form.data['pickup_name'],
       pickup_city = form.data['pickup_city'],
       pickup_state = form.data['pickup_state'],
       pickup_zip = form.data['pickup_zip'],
       pickup_address = form.data['pickup_address'],
+      drop_name = form.data['drop_name'],
       drop_city = form.data['drop_city'],
       drop_state = form.data['drop_state'],
       drop_zip = form.data['drop_zip'],
