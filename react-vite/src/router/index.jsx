@@ -4,6 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import DeliveryContainer from '../components/DeliveryContainer';
 import DeliveryDetails from '../components/DeliveryDetailsContainer';
 import Layout from './Layout';
+import DeliveryForm from '../components/DeliveryForm';
 
 
 export const router = createBrowserRouter([
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/deliveries/:id",
         element: <DeliveryDetails />
+      },
+      {
+        path: '/deliveries/new',
+        element: <DeliveryForm />
       }
     ],
   },
