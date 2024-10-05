@@ -5,3 +5,7 @@ export const STATES = [
   "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV",
   "WI", "WY"
 ];
+
+export const REQUIRED = 'Required'
+export const EXCEEDED = 'Exceeds Character Limit'
+export const INVALID = 'Invalid State'
