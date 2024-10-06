@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { createDeliveryThunk } from "../../redux/deliveries";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { createDeliveryThunk, getDeliveryThunk, updateDeliveryThunk } from "../../redux/deliveries";
 import { STATES, REQUIRED, EXCEEDED, INVALID } from "./FormUtils";
 import './DeliveryForm.css'
 
-export default function DeliveryForm() {
+export default function DeliveryForm({newDelivery}) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { id } = useParams()
+  const delivery = useSelector(state => state.deliveries[id])
 
   const [pickupName, setPickupName] = useState('')
   const [pickupCity, setPickupCity] = useState('')
@@ -17,7 +19,7 @@ export default function DeliveryForm() {
 
   const [dropName, setDropName] = useState('')
   const [dropCity, setDropCity] = useState('')
-  const [dropState, setDropState] = useState('')
+  const [dropState, setDropState] = useState('Select-State')
   const [dropZip, setDropZip] = useState('')
   const [dropAddress, setDropAddress] = useState('')
 
@@ -26,6 +28,46 @@ export default function DeliveryForm() {
 
   const [valErrors, setValErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
+
+  useEffect(() => {
+    console.log(id)
+    if(!newDelivery) dispatch(getDeliveryThunk(id))
+  }, [dispatch, id, newDelivery])
+
+  useEffect(() => {
+    if(delivery) {
+      setPickupName(delivery.pickupName)
+      setPickupAddress(delivery.pickupAddress)
+      setPickupCity(delivery.pickupCity)
+      setPickupState(delivery.pickupState)
+      setPickupZip(delivery.pickupZip)
+      setDropName(delivery.dropName)
+      setDropAddress(delivery.dropAddress)
+      setDropCity(delivery.dropCity)
+      setDropState(delivery.dropState)
+      setDropZip(delivery.dropZip)
+      setDescription(delivery.description)
+      setSpecialInstructions(delivery.specialInstructions)
+    }
+  }, [delivery])
+
+  useEffect(() => {
+    if(newDelivery) {
+      setPickupName('')
+      setPickupAddress('')
+      setPickupCity('')
+      setPickupState('Select-State')
+      setPickupZip('')
+      setDropName('')
+      setDropAddress('')
+      setDropCity('')
+      setDropState('Select-State')
+      setDropZip('')
+      setDescription('')
+      setSpecialInstructions('')
+      setSubmitted(false)
+    }
+  }, [newDelivery])
 
   useEffect(() => {
     const errors = {}
@@ -48,13 +90,12 @@ export default function DeliveryForm() {
     if (dropAddress.length > 150) errors.dropAddress = EXCEEDED
     if (dropZip.length < 1) errors.dropZip = REQUIRED
     if (dropZip.length > 15) errors.dropZip = EXCEEDED
+    if (!STATES.includes(dropState)) errors.dropState = INVALID
 
     if (description.length < 1) errors.description = REQUIRED
     if (description.length > 500) errors.description = EXCEEDED
     if (specialInstructions.length < 1) errors.specialInstructions = REQUIRED
     if (specialInstructions.length > 500) errors.specialInstructions = EXCEEDED
-
-    if (!STATES.includes(dropState)) errors.dropState = INVALID
 
     setValErrors(errors)
 
@@ -83,7 +124,28 @@ export default function DeliveryForm() {
     }
     const newDelivery = await dispatch(createDeliveryThunk(delivery))
     navigate(`/deliveries/${newDelivery.id}`)
+  }
 
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+    setSubmitted(true)
+    if(Object.values(valErrors).length) return
+    const delivery = {
+      pickup_name: pickupName,
+      pickup_city: pickupCity,
+      pickup_state: pickupState,
+      pickup_zip: pickupZip,
+      pickup_address: pickupAddress,
+      drop_name: dropName,
+      drop_city: dropCity,
+      drop_state: dropState,
+      drop_zip: dropZip,
+      drop_address: dropAddress,
+      special_instructions: specialInstructions,
+      description
+    }
+    await dispatch(updateDeliveryThunk(id, delivery))
+    navigate(`/deliveries/${id}`)
   }
 
   return (
@@ -224,7 +286,7 @@ export default function DeliveryForm() {
           name="specialInstructions"
           placeholder="Please provide any additional details or special requirements for this task"
         />
-        <div><button onClick={handleNew}>Submit</button></div>
+        <div>{newDelivery ? <button onClick={handleNew}>Create Delivery</button> : <button onClick={handleUpdate}>Update Delivery</button>}</div>
       </div>
     </div>
   )
