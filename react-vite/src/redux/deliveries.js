@@ -3,6 +3,8 @@ const GET_DELIVERY = 'deliveries/getDelivery'
 const UPDATE_COURIER = 'deliveries/takeDelivery'
 const CREATE_DELIVERY = 'deliveries/createDelivery'
 const UPDATE_DELIVERY = 'deliveries/updateDelivery'
+const DELETE_DELIVERY = 'deliveries/deleteDelivery'
+
 
 const createDelivery = (payload) => {
   return {
@@ -14,6 +16,13 @@ const createDelivery = (payload) => {
 const updateDelivery = (payload) => {
   return {
     type: UPDATE_DELIVERY,
+    payload
+  }
+}
+
+const deleteDelivery = (payload) => {
+  return {
+    type: DELETE_DELIVERY,
     payload
   }
 }
@@ -86,6 +95,19 @@ export const unassignDeliveryThunk = (id) => async (dispatch) => {
   }
 }
 
+export const createDeliveryThunk = (delivery) =>  async (dispatch) => {
+  const res = await fetch('/api/deliveries', {
+    method: 'POST',
+    body: JSON.stringify(delivery),
+    headers: {'Content-Type': 'application/json'}
+  })
+  if(res.ok) {
+    const newDelivery = await res.json()
+    dispatch(createDelivery(newDelivery))
+    return newDelivery
+  }
+}
+
 export const updateDeliveryThunk = (id, delivery) => async (dispatch) => {
   const res = await fetch(`/api/deliveries/${id}`, {
     method: 'PUT',
@@ -99,16 +121,14 @@ export const updateDeliveryThunk = (id, delivery) => async (dispatch) => {
   }
 }
 
-export const createDeliveryThunk = (delivery) =>  async (dispatch) => {
-  const res = await fetch('/api/deliveries', {
-    method: 'POST',
-    body: JSON.stringify(delivery),
-    headers: {'Content-Type': 'application/json'}
+export const deleteDeliveryThunk = (id) => async (dispatch) => {
+  const res = await fetch(`/api/deliveries/${id}`, {
+    method: 'DELETE'
   })
   if(res.ok) {
-    const newDelivery = await res.json()
-    dispatch(createDelivery(newDelivery))
-    return newDelivery
+    const confirmation = await res.json()
+    dispatch(deleteDelivery(id))
+    return confirmation
   }
 }
 
@@ -149,6 +169,11 @@ export default function deliveryReducer(state = initialState, action) {
     case UPDATE_DELIVERY: {
       const newState = {...state}
       newState[action.payload.id] = {...newState[action.payload.id], ...action.payload}
+      return newState
+    }
+    case DELETE_DELIVERY: {
+      const newState = {...state}
+      delete newState[action.payload]
       return newState
     }
     default:

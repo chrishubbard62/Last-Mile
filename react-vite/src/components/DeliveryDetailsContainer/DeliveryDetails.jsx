@@ -2,9 +2,11 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { getDeliveryThunk } from "../../redux/deliveries"
+import OpenModalButton from '../OpenModalButton'
 import './DeliveryDetails.css'
 import SFMap from '/map.jpg'
 import MessageContainer from '../MessageContainer'
+import DeleteModal from "../DeleteModal"
 
 export default function DeliveryDetails() {
   const { id } = useParams()
@@ -19,6 +21,7 @@ export default function DeliveryDetails() {
   const handleUpdate = () => {
     navigate(`/deliveries/${id}/update`)
   }
+
 
   if (!delivery) return <h2>Loading</h2>
 
@@ -45,7 +48,8 @@ export default function DeliveryDetails() {
           <h3>Special Instructions</h3>
           <div>{delivery.specialInstructions}</div>
           <div className='details-button-container'>
-            <span><button onClick={handleUpdate}>Update</button></span><span><button>Delete</button></span>
+            <span><button onClick={handleUpdate}>Update</button></span>
+            <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteModal delivery={delivery}/>}/></span>
           </div>
         </div>
       </div>

@@ -146,7 +146,6 @@ export default function DeliveryForm({newDelivery}) {
     }
     await dispatch(updateDeliveryThunk(id, delivery))
     navigate(`/deliveries/${id}`)
-    console.log(delivery)
   }
 
   return (

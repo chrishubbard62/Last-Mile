@@ -97,7 +97,6 @@ def update_delivery(id):
   '''
 
   delivery = Delivery.query.get(id)
-  print('\n\n\n\n\n\n\n\n\n\n\n proper route')
 
   if not delivery:
     return {"message": "Delivery does not exist"}, 404
@@ -165,8 +164,7 @@ def delete_delivery(id):
 
   if not delivery:
     return {"message": "Delivery does not exist"}, 404
-  if delivery.owner_id != current_user.id:
-    return {"message" : "Forbidden"}, 403
+
 
   id = delivery.id
 
