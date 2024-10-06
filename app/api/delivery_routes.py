@@ -100,17 +100,17 @@ def update_delivery(id):
 
   if not delivery:
     return {"message": "Delivery does not exist"}, 404
-  if delivery.owner_id != current_user.id:
-    return {"message" : "Forbidden"}, 403
 
   form = DeliveryForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
   if form.validate_on_submit():
+      delivery.pickup_name = form.data['pickup_name']
       delivery.pickup_city = form.data['pickup_city']
       delivery.pickup_state = form.data['pickup_state']
       delivery.pickup_zip = form.data['pickup_zip']
       delivery.pickup_address = form.data['pickup_address']
+      delivery.drop_name = form.data['drop_name']
       delivery.drop_city = form.data['drop_city']
       delivery.drop_state = form.data['drop_state']
       delivery.drop_zip = form.data['drop_zip']
@@ -164,8 +164,7 @@ def delete_delivery(id):
 
   if not delivery:
     return {"message": "Delivery does not exist"}, 404
-  if delivery.owner_id != current_user.id:
-    return {"message" : "Forbidden"}, 403
+
 
   id = delivery.id
 

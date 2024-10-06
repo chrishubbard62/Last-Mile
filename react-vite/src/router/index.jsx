@@ -25,7 +25,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/deliveries/new',
-        element: <DeliveryForm />
+        element: <DeliveryForm newDelivery={true}/>
+      },
+      {
+        path: 'deliveries/:id/update',
+        element: <DeliveryForm newDelivery={false}/>
       }
     ],
   },

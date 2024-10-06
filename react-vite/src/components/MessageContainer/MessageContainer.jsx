@@ -28,6 +28,7 @@ export default function MessageContainer() {
           <div  key={message.id}>
             <span>{message.user.username} </span>
             <span>{message.message} </span>
+            <span>{message.createdAt}</span>
             <span><button>update</button></span>
             <span><button>delete</button></span>
           </div>

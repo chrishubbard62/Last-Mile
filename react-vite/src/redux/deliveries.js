@@ -2,10 +2,27 @@ const GET_DELIVERIES = 'deliveries/getUnassigned'
 const GET_DELIVERY = 'deliveries/getDelivery'
 const UPDATE_COURIER = 'deliveries/takeDelivery'
 const CREATE_DELIVERY = 'deliveries/createDelivery'
+const UPDATE_DELIVERY = 'deliveries/updateDelivery'
+const DELETE_DELIVERY = 'deliveries/deleteDelivery'
+
 
 const createDelivery = (payload) => {
   return {
     type: CREATE_DELIVERY,
+    payload
+  }
+}
+
+const updateDelivery = (payload) => {
+  return {
+    type: UPDATE_DELIVERY,
+    payload
+  }
+}
+
+const deleteDelivery = (payload) => {
+  return {
+    type: DELETE_DELIVERY,
     payload
   }
 }
@@ -91,6 +108,30 @@ export const createDeliveryThunk = (delivery) =>  async (dispatch) => {
   }
 }
 
+export const updateDeliveryThunk = (id, delivery) => async (dispatch) => {
+  const res = await fetch(`/api/deliveries/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(delivery),
+    headers: {'Content-Type': 'application/json'}
+  })
+  if(res.ok) {
+    const updatedDelivery = await res.json()
+    dispatch(updateDelivery(updatedDelivery))
+    return updatedDelivery
+  }
+}
+
+export const deleteDeliveryThunk = (id) => async (dispatch) => {
+  const res = await fetch(`/api/deliveries/${id}`, {
+    method: 'DELETE'
+  })
+  if(res.ok) {
+    const confirmation = await res.json()
+    dispatch(deleteDelivery(id))
+    return confirmation
+  }
+}
+
 const initialState = {}
 
 export default function deliveryReducer(state = initialState, action) {
@@ -123,6 +164,16 @@ export default function deliveryReducer(state = initialState, action) {
     case CREATE_DELIVERY: {
       const newState = {...state}
       newState[action.payload.id] = action.payload
+      return newState
+    }
+    case UPDATE_DELIVERY: {
+      const newState = {...state}
+      newState[action.payload.id] = {...newState[action.payload.id], ...action.payload}
+      return newState
+    }
+    case DELETE_DELIVERY: {
+      const newState = {...state}
+      delete newState[action.payload]
       return newState
     }
     default:
