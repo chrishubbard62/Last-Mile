@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getDeliveryThunk } from "../../redux/deliveries"
 import './DeliveryDetails.css'
 import SFMap from '/map.jpg'
@@ -8,12 +8,17 @@ import MessageContainer from '../MessageContainer'
 
 export default function DeliveryDetails() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const delivery = useSelector(state => state.deliveries[id])
 
   useEffect(() => {
     dispatch(getDeliveryThunk(id))
   }, [dispatch, id])
+
+  const handleUpdate = () => {
+    navigate(`/deliveries/${id}/update`)
+  }
 
   if (!delivery) return <h2>Loading</h2>
 
@@ -39,6 +44,9 @@ export default function DeliveryDetails() {
           <div>{delivery.description}</div>
           <h3>Special Instructions</h3>
           <div>{delivery.specialInstructions}</div>
+          <div className='details-button-container'>
+            <span><button onClick={handleUpdate}>Update</button></span><span><button>Delete</button></span>
+          </div>
         </div>
       </div>
       <div className="map-placeholder">
