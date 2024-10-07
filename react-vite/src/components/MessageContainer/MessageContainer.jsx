@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getMessagesThunk } from "../../redux/messages"
 import { FaMessage } from "react-icons/fa6"
@@ -8,8 +8,9 @@ export default function MessageContainer() {
   const {id} = useParams()
   const dispatch = useDispatch()
   const messageData = useSelector(state => state.messages)
-  // const user = useSelector(state => state.session.user)
   const messages = Object.values(messageData).filter((message) => message.deliveryId === +id)
+  // const [message, setMessage] = useState()
+  // const [valErrors, setValErrors] = useState()
 
 
   useEffect(() => {
@@ -18,6 +19,7 @@ export default function MessageContainer() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
   }
 
   return (

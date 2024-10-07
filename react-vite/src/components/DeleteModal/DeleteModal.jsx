@@ -23,7 +23,5 @@ export default function DeleteModal({delivery}) {
         <button onClick={() => closeModal()}>No</button>
       </div>
     </div>
-
-
   )
 }
