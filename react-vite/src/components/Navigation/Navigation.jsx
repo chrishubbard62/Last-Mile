@@ -16,6 +16,9 @@ function Navigation() {
       <NavLink className='nav-link' to='/current'>Current</NavLink>
       </li>
       <li>
+        <NavLink className='nav-link' to='/all'>All</NavLink>
+      </li>
+      <li>
       <NavLink className='nav-link' to='/deliveries/new'>New Delivery</NavLink>
       </li>
       <li>

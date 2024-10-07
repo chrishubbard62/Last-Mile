@@ -64,6 +64,14 @@ export const getCurrentThunk = () => async (dispatch) => {
   }
 }
 
+export const getAllThunk = () => async (dispatch) => {
+  const res = await fetch ('/api/deliveries')
+  if(res.ok) {
+    const data = await res.json()
+    dispatch(getDeliveries(data.Deliveries))
+  }
+}
+
 export const getDeliveryThunk = (id) => async (dispatch) => {
   const res = await fetch(`/api/deliveries/${id}`)
   if(res.ok) {

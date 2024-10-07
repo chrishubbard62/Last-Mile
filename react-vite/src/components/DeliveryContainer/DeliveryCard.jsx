@@ -1,24 +1,28 @@
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { takeDeliveryThunk, unassignDeliveryThunk } from '../../redux/deliveries'
-
 import './DeliveryContainer.css'
 
 
 
-export default function DeliveryCard({ delivery }) {
+export default function DeliveryCard({ delivery, all }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+
 
   const handleDetails = () => {
     navigate(`/deliveries/${delivery.id}`)
   }
   const handleTake = () => {
     dispatch(takeDeliveryThunk(delivery.id))
+
   }
   const handleUnassign = () => {
     dispatch(unassignDeliveryThunk(delivery.id))
   }
+
+
 
   return (
     <div className="card-outer-container">
@@ -36,7 +40,10 @@ export default function DeliveryCard({ delivery }) {
       </div>
       <div className='card-button-container'>
         <button onClick={handleDetails}>Details</button>
-        {delivery.courierId ? <button onClick={handleUnassign}>Unassign</button> : <button onClick={handleTake}>Take</button>}
+        {!all && (delivery.courierId  ?  <button onClick={handleUnassign}>Unassign</button> : <button onClick={handleTake}>Take</button>)}
+      </div>
+      <div className='courier-container'>
+        {delivery.courier ? <p>Courier: {delivery.courier.username}</p> : <p>Courier: None</p>}
       </div>
     </div>
   )

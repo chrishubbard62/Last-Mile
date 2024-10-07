@@ -48,3 +48,11 @@ class Delivery(db.Model):
       "description": self.description,
       "specialInstructions": self.special_instructions
     }
+
+  def to_dict_courier(self):
+    res =  {**self.to_dict_basic()}
+    if self.courier_id:
+      res['courier'] = self.courier.to_dict()
+    else:
+      res['courier'] = None
+    return res

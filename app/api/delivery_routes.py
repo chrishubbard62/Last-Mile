@@ -16,12 +16,13 @@ def test():
 
 
 @delivery_routes.route('')
+@login_required
 def get_deliveries():
   '''
   Queries and returns all the deliveries that currently exist
   '''
   deliveries = Delivery.query.all()
-  return {"Deliveries" : [delivery.to_dict_basic() for delivery in deliveries ]}
+  return {"Deliveries" : [delivery.to_dict_courier() for delivery in deliveries ]}
 
 
 @delivery_routes.route('/unassigned')
@@ -31,7 +32,7 @@ def get_unassigned():
   Queries and returns all deliveries that dont have a courier id associated to them
   '''
   deliveries = Delivery.query.filter(Delivery.courier_id.is_(None))
-  return {"Deliveries" : [delivery.to_dict_basic() for delivery in deliveries ]}
+  return {"Deliveries" : [delivery.to_dict_courier() for delivery in deliveries ]}
 
 
 @delivery_routes.route('/current')
@@ -41,7 +42,7 @@ def get_current():
   Queries all the deliveries associated to the current user
   '''
   deliveries = Delivery.query.filter(Delivery.courier_id == current_user.id)
-  return {"Deliveries" : [delivery.to_dict_basic() for delivery in deliveries]}
+  return {"Deliveries" : [delivery.to_dict_courier() for delivery in deliveries]}
 
 
 @delivery_routes.route('/<int:id>')
