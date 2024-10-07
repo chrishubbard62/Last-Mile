@@ -1,5 +1,7 @@
 const GET_MESSAGES = 'messages/getMessages'
 const CREATE_MESSAGE = 'messages/createMessage'
+const UPDATE_MESSAGE = 'messages/updateMessage'
+const DELETE_MESSAGE = 'messages/deleteMessage'
 
 const getMessages = (payload) => {
   return {
@@ -11,6 +13,20 @@ const getMessages = (payload) => {
 const createMessage = (payload) => {
   return {
     type: CREATE_MESSAGE,
+    payload
+  }
+}
+
+const updateMessage = (payload) => {
+  return {
+    type: UPDATE_MESSAGE,
+    payload
+  }
+}
+
+const deleteMessage = (payload) => {
+  return {
+    type: DELETE_MESSAGE,
     payload
   }
 }
@@ -30,8 +46,32 @@ export const createMessageThunk = (id, message) => async (dispatch) => {
     headers: {'Content-Type': 'application/json'}
   })
   if(res.ok) {
-    const message = await res.json()
-    dispatch(createMessage(message))
+    const newMessage = await res.json()
+    dispatch(createMessage(newMessage))
+  }
+}
+
+export const updateMessageThunk = (id, message) => async(dispatch) => {
+  const res = await fetch(`/api/messages/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(message),
+    headers: {'Content-Type': 'application/json'}
+  })
+  if(res.ok) {
+    const updatedMessage = await res.json()
+    dispatch(updateMessage(updatedMessage))
+    return updatedMessage
+  }
+}
+
+export const deleteMessageThunk = (id) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${id}`, {
+    method: 'DELETE'
+  })
+  if(res.ok) {
+    const confirmation = await res.json()
+    dispatch(deleteMessage(id))
+    return confirmation
   }
 }
 
@@ -53,6 +93,16 @@ export default function messageReducer(state = initialState, action) {
     case CREATE_MESSAGE: {
       const newState = {...state}
       newState[action.payload.id] = action.payload
+      return newState
+    }
+    case UPDATE_MESSAGE: {
+      const newState = {...state}
+      newState[action.payload.id] = {...newState[action.payload.id], ...action.payload}
+      return newState
+    }
+    case DELETE_MESSAGE: {
+      const newState = {...state}
+      delete newState[action.payload]
       return newState
     }
     default:

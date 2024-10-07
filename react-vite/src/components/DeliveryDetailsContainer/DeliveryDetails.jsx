@@ -49,7 +49,7 @@ export default function DeliveryDetails() {
           <div>{delivery.specialInstructions}</div>
           <div className='details-button-container'>
             <span><button onClick={handleUpdate}>Update</button></span>
-            <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteModal delivery={delivery}/>}/></span>
+            <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteModal delivery={delivery} type={'delivery'}/>}/></span>
           </div>
         </div>
       </div>

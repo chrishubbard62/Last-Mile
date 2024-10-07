@@ -2,13 +2,18 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getMessagesThunk, createMessageThunk } from "../../redux/messages"
-import { FaMessage } from "react-icons/fa6"
+import OpenModalButton from '../OpenModalButton'
+import DeleteModal from "../DeleteModal"
+import UpdateModal from "../UpdateModal"
+import { IoMdSend } from "react-icons/io";
 import { EXCEEDED, REQUIRED } from "../Utils/FormUtils"
+
 
 export default function MessageContainer() {
   const {id} = useParams()
   const dispatch = useDispatch()
   const messageData = useSelector(state => state.messages)
+  const user = useSelector(state => state.session.user)
   const messages = Object.values(messageData).filter((message) => message.deliveryId === +id)
   const [message, setMessage] = useState('')
   const [valErrors, setValErrors] = useState({})
@@ -24,7 +29,7 @@ export default function MessageContainer() {
     dispatch(getMessagesThunk(id))
   }, [dispatch, id])
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     if(Object.values(valErrors).length) {
       alert(`Message ${valErrors.message}`)
@@ -46,8 +51,14 @@ export default function MessageContainer() {
             <span>{message.user.username}</span>
             <span>{message.message} </span>
             <span>{message.createdAt}</span>
-            <span><button>update</button></span>
-            <span><button>delete</button></span>
+            {user.id === message.user.id ?
+            <span>
+            <span><OpenModalButton buttonText='Update' modalComponent={<UpdateModal message={message} />}/></span>
+            <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteModal message={message} type={'message'}/>}/></span>
+            </span> :
+            <span></span>
+            }
+
           </div>
         )
       })
@@ -57,7 +68,7 @@ export default function MessageContainer() {
         value={message}
         onChange={e => setMessage(e.target.value)}
         />
-        <button onClick={handleSubmit}><FaMessage></FaMessage></button>
+        <button onClick={handleSubmit}><IoMdSend/></button>
       </form>
     </div>
   )
