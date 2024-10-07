@@ -13,11 +13,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <DeliveryContainer unassigned={true}/>,
+        element: <DeliveryContainer page={'unassigned'}/>,
       },
       {
         path: "/current",
-        element: <DeliveryContainer unassigned={false}/>
+        element: <DeliveryContainer page={'current'}/>
+      },
+      {
+        path: '/all',
+        element: <DeliveryContainer page={'all'} />
       },
       {
         path: "/deliveries/:id",
