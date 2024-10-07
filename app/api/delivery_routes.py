@@ -209,6 +209,6 @@ def create_message(id):
     )
     db.session.add(new_message)
     db.session.commit()
-    return new_message.to_dict_basic(), 201
+    return new_message.to_dict_user(), 201
 
   return {"errors": format_errors(form.errors)}, 400

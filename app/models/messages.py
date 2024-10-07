@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from datetime import datetime, timezone
+from datetime import datetime
 
 class Message(db.Model):
   __tablename__ = 'messages'
@@ -11,7 +11,7 @@ class Message(db.Model):
   delivery_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('deliveries.id')), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
   message = db.Column(db.String(500), nullable=False)
-  created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+  created_at = db.Column(db.DateTime, default=datetime.now)
 
   delivery = db.relationship('Delivery', back_populates='messages')
   user = db.relationship('User', back_populates='messages')

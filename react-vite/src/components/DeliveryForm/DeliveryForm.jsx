@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { createDeliveryThunk, getDeliveryThunk, updateDeliveryThunk } from "../../redux/deliveries";
-import { STATES, REQUIRED, EXCEEDED, INVALID } from "./FormUtils";
+import { STATES, REQUIRED, EXCEEDED, INVALID } from "../Utils/FormUtils.js";
 import './DeliveryForm.css'
 
 export default function DeliveryForm({newDelivery}) {
