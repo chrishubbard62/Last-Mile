@@ -5,7 +5,6 @@ const MapComponent = () => {
   //This sets the center of the map. This must be set BEFORE the map loads
 
 const [currentPosition, setCurrentPosition] = useState({lat:37.773972,lng:-122.431297})
-
 // This is the equivalent to a script tag
 
 const { isLoaded } = useJsApiLoader({

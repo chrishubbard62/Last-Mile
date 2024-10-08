@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getDeliveryThunk } from "../../redux/deliveries"
 import OpenModalButton from '../OpenModalButton'
 import './DeliveryDetails.css'
-import SFMap from '/map.jpg'
+
 import MessageContainer from '../MessageContainer'
 import DeleteModal from "../DeleteModal"
 import MapComponent from "../Map"
