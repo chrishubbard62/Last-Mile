@@ -9,7 +9,7 @@ const [currentPosition, setCurrentPosition] = useState({lat:37.773972,lng:-122.4
 
 const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: import.meta.env.VITE_MAPS_KEY
+    googleMapsApiKey: import.meta.env.MAPS_API_KEY
   })
 
   const containerStyle = {
