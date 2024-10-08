@@ -4,7 +4,22 @@ const UPDATE_COURIER = 'deliveries/takeDelivery'
 const CREATE_DELIVERY = 'deliveries/createDelivery'
 const UPDATE_DELIVERY = 'deliveries/updateDelivery'
 const DELETE_DELIVERY = 'deliveries/deleteDelivery'
+const GET_KEY = 'deliveries/key'
 
+const getKey = (payload) => {
+  return {
+    type: GET_KEY,
+    payload
+  }
+}
+
+export const getKeyThunk = () => async (dispatch) =>{
+  const res = await fetch('/api/deliveries/map-key')
+  if(res.ok) {
+    const data = await res.json()
+    dispatch(getKey(data.apiKey))
+  }
+}
 
 const createDelivery = (payload) => {
   return {
@@ -182,6 +197,11 @@ export default function deliveryReducer(state = initialState, action) {
     case DELETE_DELIVERY: {
       const newState = {...state}
       delete newState[action.payload]
+      return newState
+    }
+    case GET_KEY: {
+      const newState = {...state}
+      newState['apiKey'] = action.payload
       return newState
     }
     default:

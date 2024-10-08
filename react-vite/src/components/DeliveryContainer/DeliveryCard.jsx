@@ -4,12 +4,9 @@ import { takeDeliveryThunk, unassignDeliveryThunk } from '../../redux/deliveries
 import './DeliveryContainer.css'
 
 
-
 export default function DeliveryCard({ delivery, all }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-
 
   const handleDetails = () => {
     navigate(`/deliveries/${delivery.id}`)
@@ -21,8 +18,6 @@ export default function DeliveryCard({ delivery, all }) {
   const handleUnassign = () => {
     dispatch(unassignDeliveryThunk(delivery.id))
   }
-
-
 
   return (
     <div className="card-outer-container">

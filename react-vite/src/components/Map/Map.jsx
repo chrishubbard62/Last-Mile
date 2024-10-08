@@ -1,27 +1,32 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { useDispatch, useSelector } from 'react-redux';
+import {getKeyThunk} from '../../redux/deliveries'
 
 const MapComponent = () => {
-  //This sets the center of the map. This must be set BEFORE the map loads
-
+const dispatch = useDispatch()
+const key = useSelector(state => state.deliveries.apiKey)
+const [map, setMap] = useState(null)
 const [currentPosition, setCurrentPosition] = useState({lat:37.773972,lng:-122.431297})
-// This is the equivalent to a script tag
+
+useEffect(() => {
+ dispatch(getKeyThunk())
+}, [dispatch])
 
 const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: import.meta.env.MAPS_API_KEY
+    googleMapsApiKey: key
   })
-
   const containerStyle = {
     width: '700px',
     height: '700px'
   };
 
-  const [map, setMap] = useState(null)
-
   const onUnmount = useCallback(function callback(map) {
     setMap(null)
   }, [])
+
+  if(!key) return <h2>loading</h2>
 
 
     return (

@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Delivery, db, Message
 from ..utils import format_errors
 from app.forms import DeliveryForm, MessageForm
+import os
 
 
 delivery_routes = Blueprint('deliveries', __name__)
@@ -213,3 +214,13 @@ def create_message(id):
     return new_message.to_dict_user(), 201
 
   return {"errors": format_errors(form.errors)}, 400
+
+@delivery_routes.route('/map-key')
+@login_required
+def get_key():
+  '''
+  Grabs the api key from the env folder and serves it to the front end
+  '''
+  api_key = os.environ.get('MAPS_API_KEY')
+
+  return {"apiKey" : api_key}
