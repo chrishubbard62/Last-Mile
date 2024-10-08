@@ -14,6 +14,7 @@ export default function DeliveryDetails() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const delivery = useSelector(state => state.deliveries[id])
+  const key = useSelector(state => state.apiKeys.apiKey)
 
   useEffect(() => {
     dispatch(getDeliveryThunk(id))
@@ -55,7 +56,7 @@ export default function DeliveryDetails() {
         </div>
       </div>
       <div className="map-placeholder">
-        <MapComponent />
+        {key !== undefined && <MapComponent apiKey={key}/>}
       </div>
     </div>
     <div className="messages-container">

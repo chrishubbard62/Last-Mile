@@ -4,6 +4,7 @@ import { useDispatch, useSelector} from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
+import { getKeyThunk } from "../redux/apiKey";
 
 
 export default function Layout() {
@@ -12,6 +13,7 @@ export default function Layout() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
+    dispatch(getKeyThunk())
   }, [dispatch]);
 
   if(!sessionUser && isLoaded) {

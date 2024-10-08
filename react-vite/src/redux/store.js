@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import deliveryReducer from "./deliveries";
 import messageReducer from "./messages";
+import apiKeyReducer from "./apiKey";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   deliveries: deliveryReducer,
-  messages: messageReducer
+  messages: messageReducer,
+  apiKeys: apiKeyReducer
 });
 
 let enhancer;
