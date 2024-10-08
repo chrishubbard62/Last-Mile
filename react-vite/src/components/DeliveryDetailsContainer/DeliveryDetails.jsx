@@ -7,6 +7,7 @@ import './DeliveryDetails.css'
 import SFMap from '/map.jpg'
 import MessageContainer from '../MessageContainer'
 import DeleteModal from "../DeleteModal"
+import MapComponent from "../Map"
 
 export default function DeliveryDetails() {
   const { id } = useParams()
@@ -54,7 +55,7 @@ export default function DeliveryDetails() {
         </div>
       </div>
       <div className="map-placeholder">
-        <img className='map' src={SFMap} alt="map" />
+        <MapComponent />
       </div>
     </div>
     <div className="messages-container">

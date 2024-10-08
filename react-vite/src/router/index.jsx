@@ -7,6 +7,7 @@ import Layout from './Layout';
 import DeliveryForm from '../components/DeliveryForm';
 
 
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
       {
         path: 'deliveries/:id/update',
         element: <DeliveryForm newDelivery={false}/>
-      }
+      },
     ],
   },
   {
