@@ -2,6 +2,7 @@ import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
+import logo from '/logo.jpg'
 import "./LoginForm.css";
 
 function LoginFormPage() {
@@ -31,6 +32,25 @@ function LoginFormPage() {
     }
   };
 
+  const handleDemo = async (e) => {
+    e.preventDefault()
+    const serverResponse = await dispatch(
+      thunkLogin({
+        email: 'demo@aa.io',
+        password: 'password',
+      })
+    );
+
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      navigate("/");
+    }
+  };
+
+
+
+
   const handleNavigate = (e) => {
     e.preventDefault()
     navigate('/signup')
@@ -40,9 +60,10 @@ function LoginFormPage() {
     <>
       <div className="login-outer-container">
         <div className='login-inner-container'>
-          <h1 className="title-h1">WELCOME TO LAST MILE</h1>
+          <h1 className="title-h1">WELCOME TO</h1>
+          <img className='login-signup-logo' src={logo} alt="logo" />
           {errors.length > 0 &&
-            errors.map((message) => <p key={message}>{message}</p>)}
+            errors.map((message) => <p className="errors" key={message}>{message}</p>)}
           <form className="login-form" onSubmit={handleSubmit}>
             <label>
               Email
@@ -53,7 +74,7 @@ function LoginFormPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {errors.email && <p>{errors.email}</p>}
+            {errors.email && <p className="errors">{errors.email}</p>}
             <label>
               Password
             </label>
@@ -63,11 +84,13 @@ function LoginFormPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {errors.password && <p>{errors.password}</p>}
+            {errors.password && <p className="errors">{errors.password}</p>}
             <button className="login-submit" type="submit">Log In</button>
           </form>
           <button onClick={handleNavigate}>Sign Up</button>
+          <button onClick={handleDemo}>Log In as Demo</button>
         </div>
+
 
       </div>
 

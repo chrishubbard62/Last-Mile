@@ -1,6 +1,6 @@
 /* TODO: Add sitewide styles */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-button {
+/* button {
   height: 30px;
   background-color: #262267;
   color: white
@@ -8,6 +8,28 @@ button {
 
 button:hover {
   cursor: pointer;
+} */
+
+button {
+  background-color: #262267;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.9s ease-in, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #7771e5;
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: #262267;
+  transform: scale(1);
 }
 
 a {
@@ -26,4 +48,26 @@ ul {
 body {
   font-size: 1.1rem;
   font-family: "Montserrat", sans-serif;
+}
+
+.login-signup-logo {
+  height: 300px;
+  border-radius: 5px;
+}
+
+.errors {
+  color: red
+}
+
+input {
+  border-radius: 4px;
+  font-size: 1rem;
+  height: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+input:focus {
+  outline: 1px solid #262267;
+  transform: scale(1.05);
+
 }
