@@ -1,4 +1,5 @@
 /* TODO: Add sitewide styles */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 button {
   height: 30px;
   background-color: #262267;
@@ -24,4 +25,5 @@ ul {
 
 body {
   font-size: 1.1rem;
+  font-family: "Montserrat", sans-serif;
 }

@@ -4,14 +4,10 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getDeliveryThunk } from "../../redux/deliveries"
 import OpenModalButton from '../OpenModalButton'
 import './DeliveryDetails.css'
-import Map from '/map.jpg'
 import MessageContainer from '../MessageContainer'
 import DeleteModal from "../DeleteModal"
 import MapComponent from "../Map"
-import {
-  setKey,
-  fromAddress
-} from 'react-geocode'
+import { setKey, fromAddress } from 'react-geocode'
 
 export default function DeliveryDetails() {
   const { id } = useParams()
@@ -23,8 +19,6 @@ export default function DeliveryDetails() {
   const [dropMarker, setDropMarker] = useState({ lat: null, lng: null })
   const [markersLoaded, setMarkersLoaded] = useState(false)
 
-
-
   useEffect(() => {
     dispatch(getDeliveryThunk(id))
   }, [dispatch, id])
@@ -32,7 +26,6 @@ export default function DeliveryDetails() {
   const handleUpdate = () => {
     navigate(`/deliveries/${id}/update`)
   }
-
 
   // TODO---------------------- apiKey set to null while developing to save api calls -----------------------------
   useEffect(() => {
@@ -51,7 +44,6 @@ export default function DeliveryDetails() {
         console.error('hello')
         setMarkersLoaded(true)
       }
-
     }
     if (delivery) getMarkers()
   }, [delivery, key])
