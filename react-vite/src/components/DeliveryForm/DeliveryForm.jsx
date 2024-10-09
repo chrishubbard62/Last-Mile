@@ -30,7 +30,7 @@ export default function DeliveryForm({newDelivery}) {
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
-    console.log(id)
+
     if(!newDelivery) dispatch(getDeliveryThunk(id))
   }, [dispatch, id, newDelivery])
 

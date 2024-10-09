@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
-
-
-const MapComponent = ({apiKey}) => {
+const MapComponent = ({ apiKey, pickup, drop }) => {
   const [map, setMap] = useState(null)
   const [currentPosition, setCurrentPosition] = useState({ lat: 37.773972, lng: -122.431297 })
 
@@ -22,17 +20,22 @@ const MapComponent = ({apiKey}) => {
   }, [])
 
   return (
-    // Important! Always set the container height explicitly
-
     <div className="map_page__container">
-
       <div style={{ height: '900px', width: '900px' }}>
         {isLoaded && <GoogleMap
           mapContainerStyle={containerStyle}
-          zoom={12}
+          zoom={13}
           center={currentPosition}
           onUnmount={onUnmount}
         >
+          <Marker
+            position={pickup}
+            title='Pickup'
+          />
+          <Marker
+            position={drop}
+            title='Drop Off'
+          />
         </GoogleMap>}
       </div>
 
@@ -40,6 +43,5 @@ const MapComponent = ({apiKey}) => {
   );
 
 }
-
 
 export default MapComponent;

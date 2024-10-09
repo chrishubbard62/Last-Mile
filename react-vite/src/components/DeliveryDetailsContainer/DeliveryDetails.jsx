@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { getDeliveryThunk } from "../../redux/deliveries"
@@ -8,6 +8,10 @@ import './DeliveryDetails.css'
 import MessageContainer from '../MessageContainer'
 import DeleteModal from "../DeleteModal"
 import MapComponent from "../Map"
+import {
+  setKey,
+  fromAddress
+} from 'react-geocode'
 
 export default function DeliveryDetails() {
   const { id } = useParams()
@@ -15,6 +19,11 @@ export default function DeliveryDetails() {
   const dispatch = useDispatch()
   const delivery = useSelector(state => state.deliveries[id])
   const key = useSelector(state => state.apiKeys.apiKey)
+  const [pickupMarker, setPickupMarker] = useState({lat: null, lng:null})
+  const [dropMarker, setDropMarker] = useState({lat: null, lng:null})
+  const [markersLoaded, setMarkersLoaded] = useState(false)
+
+
 
   useEffect(() => {
     dispatch(getDeliveryThunk(id))
@@ -23,6 +32,26 @@ export default function DeliveryDetails() {
   const handleUpdate = () => {
     navigate(`/deliveries/${id}/update`)
   }
+
+  // useEffect(() => {
+  //   setPickupMarker({ lat: 37.773972, lng: -122.431297 })
+  //   setDropMarker({ lat: 37.773972, lng: -122.431297 })
+  //   setMarkersLoaded(true)
+  // }, [delivery, key])
+
+  useEffect(() => {
+    const getMarkers = async () => {
+      setKey(key)
+      const pickupRes = await fromAddress(`${delivery.pickupAddress} ,${delivery.pickupCity}, ${delivery.pickupState}`)
+      const {lat: pickupLat, lng: pickupLng} = pickupRes.results[0].geometry.location
+      setPickupMarker({lat: pickupLat, lng: pickupLng})
+      const dropRes = await fromAddress(`${delivery.dropAddress} ,${delivery.dropCity}, ${delivery.dropState}`)
+      const {lat: dropLat, lng: dropLng} = dropRes.results[0].geometry.location
+      setDropMarker({lat: dropLat, lng: dropLng})
+      setMarkersLoaded(true)
+    }
+    if(delivery) getMarkers()
+  },[delivery, key])
 
 
   if (!delivery) return <h2>Loading</h2>
@@ -56,7 +85,7 @@ export default function DeliveryDetails() {
         </div>
       </div>
       <div className="map-placeholder">
-        {key !== undefined && <MapComponent apiKey={key}/>}
+        {key && markersLoaded && <MapComponent apiKey={key} pickup={pickupMarker} drop={dropMarker}/>}
       </div>
     </div>
     <div className="messages-container">
