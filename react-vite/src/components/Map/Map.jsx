@@ -5,11 +5,12 @@ const MapComponent = ({ apiKey, pickup, drop }) => {
   const [map, setMap] = useState(null)
   const [currentPosition, setCurrentPosition] = useState({ lat: 37.773972, lng: -122.431297 })
 
+  // TODO---------------------- apiKey set to null while developing to save api calls -----------------------------
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: apiKey
+    googleMapsApiKey: null
   })
-
+  // TODO---------------------- apiKey set to null while developing to save api calls -----------------------------
   const containerStyle = {
     width: '700px',
     height: '700px'
