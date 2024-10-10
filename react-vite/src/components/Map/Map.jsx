@@ -1,14 +1,14 @@
 import { useState, useCallback } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
-const MapComponent = ({ apiKey, pickup, drop }) => {
+const MapComponent = ({ apiKey, pickup, drop, currentPosition }) => {
   const [map, setMap] = useState(null)
-  const [currentPosition, setCurrentPosition] = useState({ lat: 37.773972, lng: -122.431297 })
+  // const [currentPosition, setCurrentPosition] = useState({ lat: 37.773972, lng: -122.431297 })
 
   // TODO---------------------- apiKey set to null while developing to save api calls -----------------------------
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: null
+    googleMapsApiKey: apiKey
   })
   // TODO---------------------- apiKey set to null while developing to save api calls -----------------------------
   const containerStyle = {

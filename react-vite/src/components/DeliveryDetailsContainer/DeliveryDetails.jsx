@@ -17,6 +17,7 @@ export default function DeliveryDetails() {
   const key = useSelector(state => state.apiKeys.apiKey)
   const [pickupMarker, setPickupMarker] = useState({ lat: null, lng: null })
   const [dropMarker, setDropMarker] = useState({ lat: null, lng: null })
+  const [center, setCenter] = useState({ lat: 37.773972, lng: -122.431297 })
   const [markersLoaded, setMarkersLoaded] = useState(false)
 
   useEffect(() => {
@@ -31,17 +32,17 @@ export default function DeliveryDetails() {
   useEffect(() => {
     const getMarkers = async () => {
       try {
-        setKey(null)
+        setKey(key)
         const pickupRes = await fromAddress(`${delivery.pickupAddress} ,${delivery.pickupCity}, ${delivery.pickupState}`)
         const { lat: pickupLat, lng: pickupLng } = pickupRes.results[0].geometry.location
         setPickupMarker({ lat: pickupLat, lng: pickupLng })
+        setCenter({ lat: pickupLat, lng: pickupLng })
         const dropRes = await fromAddress(`${delivery.dropAddress} ,${delivery.dropCity}, ${delivery.dropState}`)
         const { lat: dropLat, lng: dropLng } = dropRes.results[0].geometry.location
         setDropMarker({ lat: dropLat, lng: dropLng })
         setMarkersLoaded(true)
       }
       catch (error) {
-        console.error('hello')
         setMarkersLoaded(true)
       }
     }
@@ -80,7 +81,7 @@ export default function DeliveryDetails() {
             </div>
         </div>
         <div className="map-container">
-          {key && markersLoaded && <MapComponent apiKey={key} pickup={pickupMarker} drop={dropMarker} />}
+          {key && markersLoaded && <MapComponent apiKey={key} pickup={pickupMarker} drop={dropMarker} currentPosition={center}/>}
         </div>
       </div>
       <div className="messages-container">
