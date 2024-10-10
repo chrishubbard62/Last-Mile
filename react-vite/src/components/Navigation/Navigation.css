@@ -3,7 +3,15 @@
   background-color: white;
 }
 
+.nav-container {
+  
+}
+
 .nav-bar {
   display: flex;
   justify-content: space-around;
+}
+
+.active {
+  background-color: aliceblue;
 }

@@ -48,9 +48,6 @@ function LoginFormPage() {
     }
   };
 
-
-
-
   const handleNavigate = (e) => {
     e.preventDefault()
     navigate('/signup')
@@ -90,8 +87,6 @@ function LoginFormPage() {
           <button onClick={handleNavigate}>Sign Up</button>
           <button onClick={handleDemo}>Log In as Demo</button>
         </div>
-
-
       </div>
 
     </>
