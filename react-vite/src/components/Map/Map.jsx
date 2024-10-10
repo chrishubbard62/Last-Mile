@@ -22,7 +22,7 @@ const MapComponent = ({ apiKey, pickup, drop }) => {
 
   return (
     <div className="map_page__container">
-      <div style={{ height: '900px', width: '900px' }}>
+      <div style={{ height: '700px', width: '700px' }}>
         {isLoaded && <GoogleMap
           mapContainerStyle={containerStyle}
           zoom={13}

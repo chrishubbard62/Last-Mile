@@ -57,21 +57,21 @@ export default function DeliveryDetails() {
         <div className="details-delivery-container">
           <div className="details-pickup">
             <h2>Delivery Details</h2>
-            <h3>Pickup</h3>
+            <h3 className="address-category">Pickup</h3>
             <h3>{delivery.pickupName}</h3>
             <div>{delivery.pickupAddress}</div>
             <div>{delivery.pickupCity}, {delivery.pickupState} {delivery.pickupZip}</div>
           </div>
           <div className="details-drop">
-            <h3>Drop off</h3>
+            <h3 className="address-category">Drop off</h3>
             <h3>{delivery.dropName}</h3>
             <div>{delivery.dropAddress}</div>
             <div>{delivery.dropCity}, {delivery.dropState} {delivery.dropZip}</div>
           </div>
           <div className="details-instructions">
-            <h3>Description</h3>
+            <h3 className="address-category">Description</h3>
             <div>{delivery.description}</div>
-            <h3>Special Instructions</h3>
+            <h3 className="address-category">Special Instructions</h3>
             <div>{delivery.specialInstructions}</div>
             <div className='details-button-container'>
               <span><button onClick={handleUpdate}>Update</button></span>
@@ -79,7 +79,7 @@ export default function DeliveryDetails() {
             </div>
           </div>
         </div>
-        <div className="map-placeholder">
+        <div className="map-container">
           {key && markersLoaded && <MapComponent apiKey={key} pickup={pickupMarker} drop={dropMarker} />}
         </div>
       </div>

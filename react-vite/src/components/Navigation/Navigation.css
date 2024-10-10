@@ -2,7 +2,6 @@
   position: absolute;
   background-color: white;
   top: 69px;
-  right: 450px;
   padding: 10px;
   outline: 1px solid #262267;
   border-radius: 5px;
@@ -10,12 +9,12 @@
 
 .profile-logout {
   margin-top: 5px;
-
 }
 
 .nav-container {
   height: 80px;
   position: fixed;
+  background-image: linear-gradient(#c8c6dd, #9e9bc4);
   background-color: #deddee;
   top: 0;
   left: 0;
@@ -26,7 +25,7 @@
 .nav-bar-outer {
   display: flex;
   justify-content: center;
-  outline: 1px solid black;
+
 }
 
 .nav-bar {

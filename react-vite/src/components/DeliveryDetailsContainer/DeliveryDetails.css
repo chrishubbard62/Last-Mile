@@ -1,5 +1,33 @@
 .details-outer-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /* outline: 1px solid red; */
+  justify-items: center;
+  width: 62%;
 }
 
+.details-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* outline: 2px solid blue; */
+}
+
+.details-delivery-container {
+  display: flex;
+  flex-direction: column;
+  /* outline: 5px solid black; */
+}
+
+.address-category {
+  text-decoration: underline;
+}
+
+.map-container {
+  /* outline: 2px solid green; */
+}
+
+.messages-container {
+  /* outline: 3px solid yellow; */
+  width: 60%;
+}

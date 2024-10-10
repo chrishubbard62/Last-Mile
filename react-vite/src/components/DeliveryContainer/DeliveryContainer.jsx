@@ -29,21 +29,21 @@ export default function DeliveryContainer({page}) {
 
   if(page === 'unassigned') {
     return (
-      <div>
+      <div className="outer-que">
         {unassignedDeliveries.map(delivery => <DeliveryCard key={delivery.id} delivery={delivery}/>)}
       </div>
     )
   }
   if(page === 'current') {
     return (
-      <div>
+      <div className="outer-que">
         {currentDeliveries.map(delivery => <DeliveryCard key={delivery.id} delivery={delivery}/>)}
       </div>
     )
   }
   if(page === 'all') {
     return (
-      <div>
+      <div className="outer-que">
         {allDeliveries.map(delivery => <DeliveryCard key={delivery.id} delivery={delivery} all={true}/>)}
       </div>
     )

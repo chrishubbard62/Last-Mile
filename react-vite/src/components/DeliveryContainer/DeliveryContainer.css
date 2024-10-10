@@ -1,17 +1,35 @@
 .card-outer-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 3rem;
-  outline: 1px solid green
+  width: 62%;
+  background-color: whitesmoke;
+  outline: 1px solid #7771e5;
+  align-items: center;
+  padding: 5px;
+  border-radius: 2px;
 }
 
-.pickup-container {
-  outline: 2px solid red
+.outer-que {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-.drop-container {
-  outline: 2px solid red;
+.card-button-container {
+  display: flex;
+  gap: 3px
 }
 
+h3 {
+ margin: 4px;
+ margin-left: 0;
+}
+
+
+/*?----where the hell is this from?-------?
+/*
 .delivery-nav {
   display: flex;
   height: 4rem;
@@ -27,4 +45,4 @@
 .nav-link {
   background-color: #e8e7f3;
   padding: .5rem;
-}
+} */
