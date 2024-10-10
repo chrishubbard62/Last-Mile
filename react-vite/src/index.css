@@ -89,3 +89,7 @@ textarea:focus {
   outline: 1px solid #262267;
   transform: scale(1.02);
 }
+
+#root {
+  padding: 80px;
+}

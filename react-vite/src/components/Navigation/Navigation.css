@@ -1,17 +1,63 @@
 .profile-dropdown {
   position: absolute;
   background-color: white;
+  top: 69px;
+  right: 450px;
+  padding: 10px;
+  outline: 1px solid #262267;
+  border-radius: 5px;
 }
 
-/* .nav-container {
+.profile-logout {
+  margin-top: 5px;
 
-} */
+}
+
+.nav-container {
+  height: 80px;
+  position: fixed;
+  background-color: #deddee;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.nav-bar-outer {
+  display: flex;
+  justify-content: center;
+  outline: 1px solid black;
+}
 
 .nav-bar {
+  width: 60%;
+  padding-left: 0;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .active {
-  background-color: aliceblue;
+  background-color: #262267;
+  color: white;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  padding-bottom: 5px;
+}
+
+.waiting {
+  transition: 0.2s ease-in;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  padding-bottom: 5px;
+}
+
+.waiting:hover {
+  background-color: #262267;
+  color: white;
+  transform: scale(105%);
 }
