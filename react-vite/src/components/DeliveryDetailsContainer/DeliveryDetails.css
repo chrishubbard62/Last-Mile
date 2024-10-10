@@ -1,7 +1,6 @@
 .details-outer-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* outline: 1px solid red; */
   justify-items: center;
   width: 62%;
 }
@@ -10,12 +9,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* outline: 2px solid blue; */
 }
 
 .details-delivery-container {
   display: flex;
   flex-direction: column;
+  gap: 5px;
   /* outline: 5px solid black; */
 }
 
@@ -23,11 +22,47 @@
   text-decoration: underline;
 }
 
-.map-container {
-  /* outline: 2px solid green; */
+.details-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 10px;
+
 }
 
 .messages-container {
-  /* outline: 3px solid yellow; */
-  width: 60%;
+  width: 62%;
+}
+
+.messages-outer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.single-message {
+  outline: 1px solid #7771e5;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: whitesmoke;
+  padding: 1px;
+  border-radius: 2px;
+}
+
+.message-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.message-button-box {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 2px;
+}
+
+.message-form-input {
+  width: 90%;
+  height: 30px;
 }

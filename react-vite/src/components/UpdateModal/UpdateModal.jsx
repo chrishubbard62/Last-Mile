@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { updateMessageThunk } from "../../redux/messages";
 import { EXCEEDED, REQUIRED } from "../Utils/FormUtils";
 import { useDispatch } from "react-redux";
+import "./UpdateModal.css"
 
 export default function UpdateModal({ message }) {
   const { closeModal } = useModal();

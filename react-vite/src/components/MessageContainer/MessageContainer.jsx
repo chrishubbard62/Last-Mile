@@ -9,6 +9,7 @@ import { IoMdSend } from "react-icons/io";
 import { EXCEEDED, REQUIRED } from "../Utils/FormUtils"
 
 
+
 export default function MessageContainer() {
   const {id} = useParams()
   const dispatch = useDispatch()
@@ -43,32 +44,33 @@ export default function MessageContainer() {
   }
 
   return (
-    <div className="Messages-outer-container">
+    <div className="messages-outer-container">
       <h2>MESSAGES</h2>
       {messages.map((message) => {
         return (
-          <div  key={message.id}>
-            <span>{message.user.username}</span>
+          <div className='single-message' key={message.id}>
+            <span>{message.user.username}:
+            <div>{message.createdAt}</div>
+            </span>
             <span>{message.message} </span>
-            <span>{message.createdAt}</span>
+            <span></span>
             {user.id === message.user.id ?
-            <span>
-            <span><OpenModalButton buttonText='Update' modalComponent={<UpdateModal message={message} />}/></span>
-            <span><OpenModalButton buttonText='Delete' modalComponent={<DeleteModal message={message} type={'message'}/>}/></span>
+            <span className="message-button-box">
+            <span className="message-buttons"><OpenModalButton buttonText='Update' modalComponent={<UpdateModal message={message} />}/></span>
+            <span className="message-buttons"><OpenModalButton buttonText='Delete' modalComponent={<DeleteModal message={message} type={'message'}/>}/></span>
             </span> :
             <span></span>
             }
-
           </div>
         )
       })
     }
-      <form>
-        <input type="text"
+      <form className="message-form">
+        <input className="message-form-input" type="text"
         value={message}
         onChange={e => setMessage(e.target.value)}
         />
-        <button onClick={handleSubmit}><IoMdSend/></button>
+        <button className='message-buttons' onClick={handleSubmit}><IoMdSend/></button>
       </form>
     </div>
   )

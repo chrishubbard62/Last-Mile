@@ -1,0 +1,20 @@
+.update-modal {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 500px;
+  gap: 5px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.update-modal input {
+  width: 90%;
+  height: 30px;
+}
+
+.update-modal-buttons {
+  display: flex;
+  gap: 5px
+}

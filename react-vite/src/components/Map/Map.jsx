@@ -13,10 +13,11 @@ const MapComponent = ({ apiKey, pickup, drop }) => {
   // TODO---------------------- apiKey set to null while developing to save api calls -----------------------------
   const containerStyle = {
     width: '700px',
-    height: '700px'
+    height: '650px'
   };
 
   const onUnmount = useCallback(function callback(map) {
+    console.log(map)
     setMap(null)
   }, [])
 
