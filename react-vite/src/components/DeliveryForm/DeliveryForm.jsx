@@ -149,8 +149,9 @@ export default function DeliveryForm({newDelivery}) {
   }
 
   return (
-    <div>
-      <h2>Page Title Placeholder</h2>
+    <div className="form-outer-container">
+      {newDelivery ? <h2>Create New Delivery</h2> : <h2>Update Delivery</h2>}
+
       <div className="form-container">
         <div className="form-pickup-container">
           <div>
@@ -256,6 +257,7 @@ export default function DeliveryForm({newDelivery}) {
           </select>
           <div>
             <label htmlFor="dropZip">Drop Zip</label>
+            {submitted && <span className="errors"> {valErrors.dropZip}</span>}
           </div>
           <input
             type="text"
@@ -286,7 +288,7 @@ export default function DeliveryForm({newDelivery}) {
           name="specialInstructions"
           placeholder="Please provide any additional details or special requirements for this task"
         />
-        <div>{newDelivery ? <button onClick={handleNew}>Create Delivery</button> : <button onClick={handleUpdate}>Update Delivery</button>}</div>
+        <div>{newDelivery ? <button className="delivery-form-button" onClick={handleNew}>Create Delivery</button> : <button onClick={handleUpdate}>Update Delivery</button>}</div>
       </div>
     </div>
   )

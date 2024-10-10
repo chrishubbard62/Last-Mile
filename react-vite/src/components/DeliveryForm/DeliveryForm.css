@@ -1,5 +1,108 @@
-.form-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* .form-outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.form-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+
+.form-container input {
+  width: 75%;
+} */
+.form-outer-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: whitesmoke;
+  border-radius: 2px;
+  outline: 1px solid #7771e5;
+}
+
+h2 {
+  text-align: center;
+  color: black;
+  margin-bottom: 20px;
+}
+
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.form-pickup-container, .form-drop-container {
+  width: 48%;
+}
+
+.form-details-container {
+  margin-top: 20px;
+}
+
+.form-outer-container select {
+  width: 50px;
+}
+
+.form-outer-container input[type="text"], textarea, select {
+  width: 100%;
+  padding: 10px;
+  height: 1.2rem;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background-color: #fff;
+
+}
+
+.form-outer-container input[type="text"]:focus, textarea:focus, select:focus {
+  outline: 1px solid #262267;
+  transform: scale(1.05);
+}
+
+.form-outer-container textarea {
+  resize: vertical;
+  height: 150px;
+  min-height: 150px;
+}
+
+
+.form-outer-container label {
+  display: block;
+  font-size: 1rem;
+  color: black;
+  margin-bottom: 6px;
+}
+
+.delivery-form-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #262267;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.9s ease-in, transform 0.2s ease;
+}
+
+.form-outer-container button:hover {
+  background-color: #7771e5;
+  transform: scale(1.03);
+}
+
+/* @media (max-width: 768px) {
+  .form-pickup-container, .form-drop-container {
+    width: 100%;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+} */
