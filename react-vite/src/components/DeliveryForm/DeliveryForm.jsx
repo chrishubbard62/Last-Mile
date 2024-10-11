@@ -288,7 +288,7 @@ export default function DeliveryForm({newDelivery}) {
           name="specialInstructions"
           placeholder="Please provide any additional details or special requirements for this task"
         />
-        <div>{newDelivery ? <button className="delivery-form-button" onClick={handleNew}>Create Delivery</button> : <button onClick={handleUpdate}>Update Delivery</button>}</div>
+        <div>{newDelivery ? <button className="delivery-form-button" onClick={handleNew}>Create Delivery</button> : <button className="delivery-form-button" onClick={handleUpdate}>Update Delivery</button>}</div>
       </div>
     </div>
   )

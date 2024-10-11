@@ -32,7 +32,8 @@ export default function DeliveryDetails() {
   useEffect(() => {
     const getMarkers = async () => {
       try {
-        setKey(key)
+        //!--------NULL ME--------
+        setKey(null)
         const pickupRes = await fromAddress(`${delivery.pickupAddress} ,${delivery.pickupCity}, ${delivery.pickupState}`)
         const { lat: pickupLat, lng: pickupLng } = pickupRes.results[0].geometry.location
         setPickupMarker({ lat: pickupLat, lng: pickupLng })
