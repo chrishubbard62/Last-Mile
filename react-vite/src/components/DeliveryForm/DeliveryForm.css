@@ -1,20 +1,4 @@
-/* .form-outer-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
-.form-container {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
-}
-
-.form-container input {
-  width: 75%;
-} */
 .form-outer-container {
   max-width: 800px;
   margin: 0 auto;
@@ -46,15 +30,14 @@ h2 {
 }
 
 .form-outer-container select {
-  width: 50px;
+  width: 115px;
 }
 
-.form-outer-container input[type="text"], textarea, select {
+.form-outer-container input[type="text"], textarea {
   width: 100%;
   padding: 10px;
   height: 1.2rem;
   margin: 8px 0;
-  border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 1rem;
