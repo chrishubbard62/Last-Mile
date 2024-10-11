@@ -1,6 +1,6 @@
 # Welcome to the Last Mile
 
-Last Mile is a lightweight logistics app built to help a company efficiently organize deliveries, work loads for employees across the organization. Users should be able to log in to create, and update any deliveries they see on the board. This allows for the flexibility a small delivery company would need to manage its work flow, in turn increasing the productivity of the entire team.
+Last Mile is a streamlined logistics app designed to help companies efficiently manage deliveries and distribute workloads across their teams. With an intuitive interface, users can easily log in to create, update, and track deliveries in real-time. This flexible system empowers small delivery businesses to adapt quickly to changing demands, ensuring smooth workflow management. By simplifying coordination and enhancing team collaboration, Last Mile boosts overall productivity and operational efficiency.
 
 ## Technologies
 
