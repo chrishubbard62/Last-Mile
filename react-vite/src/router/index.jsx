@@ -5,6 +5,7 @@ import DeliveryContainer from '../components/DeliveryContainer';
 import DeliveryDetails from '../components/DeliveryDetailsContainer';
 import Layout from './Layout';
 import DeliveryForm from '../components/DeliveryForm';
+import TempChat from '../components/TempChat';
 
 
 
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
         path: 'deliveries/:id/update',
         element: <DeliveryForm newDelivery={false}/>
       },
+      {
+        path: 'socket/test',
+        element: <TempChat />
+      }
     ],
   },
   {

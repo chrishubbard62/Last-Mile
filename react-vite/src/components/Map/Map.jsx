@@ -9,7 +9,7 @@ const MapComponent = ({ apiKey, pickup, drop, currentPosition }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     //!-------NULL ME--------
-    googleMapsApiKey: apiKey
+    googleMapsApiKey: null
   })
   // TODO---------------------- apiKey set to null while developing to save api calls -----------------------------
   const containerStyle = {

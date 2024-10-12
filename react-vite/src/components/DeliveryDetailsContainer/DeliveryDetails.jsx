@@ -33,7 +33,7 @@ export default function DeliveryDetails() {
     const getMarkers = async () => {
       try {
         //!--------NULL ME--------
-        setKey(key)
+        setKey(null)
         const pickupRes = await fromAddress(`${delivery.pickupAddress} ,${delivery.pickupCity}, ${delivery.pickupState}`)
         const { lat: pickupLat, lng: pickupLng } = pickupRes.results[0].geometry.location
         setPickupMarker({ lat: pickupLat, lng: pickupLng })
