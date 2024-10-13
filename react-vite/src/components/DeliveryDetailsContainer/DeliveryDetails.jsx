@@ -20,7 +20,6 @@ export default function DeliveryDetails() {
   const [center, setCenter] = useState({ lat: 37.773972, lng: -122.431297 })
   const [markersLoaded, setMarkersLoaded] = useState(false)
 
-  console.log(process.env.MAPS_API_KEY)
   useEffect(() => {
     dispatch(getDeliveryThunk(id))
   }, [dispatch, id])

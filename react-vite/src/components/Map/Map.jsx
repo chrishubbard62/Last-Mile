@@ -18,7 +18,6 @@ const MapComponent = ({ apiKey, pickup, drop, currentPosition }) => {
   };
 
   const onUnmount = useCallback(function callback(map) {
-    console.log(map)
     setMap(null)
   }, [])
 
