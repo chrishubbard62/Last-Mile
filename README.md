@@ -24,7 +24,7 @@ Google-Maps: <br>
 
 
 
-![alt text](Landing-Page.jpg)
-![alt text](Unassigned.jpg)
-![alt text](Form.jpg)
-![alt text](Details.JPG)
+![alt text](/readme-assets/Landing-Page.jpg)
+![alt text](/readme-assets/Unassigned.jpg)
+![alt text](/readme-assets/Form.jpg)
+![alt text](/readme-assets/Details.JPG)
